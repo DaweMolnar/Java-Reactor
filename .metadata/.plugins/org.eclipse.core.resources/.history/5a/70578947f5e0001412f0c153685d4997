@@ -1,0 +1,17 @@
+package reactor;
+import java.nio.channels.SocketChannel;
+import java.io.IOException;
+
+public class Acceptor implements Runnable {
+    public void run() {
+        try {
+            SocketChannel socketChannel = serverSocketChannel.accept();
+            if (socketChannel != null) {
+                    new Handler(selector, socketChannel);
+            }
+            System.out.println("Connection Accepted by Reactor");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
